@@ -1,0 +1,18 @@
+pragma solidity 0.8.2;
+import "./NFTToken4_flat(single mint).sol";
+
+contract ds{
+    event currentBalance(uint256 bal);
+    function deposit() public payable{
+    emit currentBalance(address(this).balance);    
+    }
+    function send(address add,uint256 val) public {
+        payable(add).transfer(val);
+        emit currentBalance(address(this).balance);    
+
+    }
+    function buyNFT(address addr) public{
+        TestNFT4 con = TestNFT4(addr);
+        con.mint{value:5 ether}(2);
+    }
+}
